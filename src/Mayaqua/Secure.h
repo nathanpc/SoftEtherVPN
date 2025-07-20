@@ -109,6 +109,7 @@
 #define	MAX_SEC_DATA_SIZE		4096
 
 // Type declaration related to PKCS#11
+#include "cryptoki.h"
 #ifndef	SECURE_C
 typedef struct CK_FUNCTION_LIST *CK_FUNCTION_LIST_PTR;
 typedef struct SEC_DATA_WIN32	SEC_DATA_WIN32;
@@ -157,8 +158,8 @@ struct SECURE
 	UINT Error;								// The error that last occurred
 	struct CK_FUNCTION_LIST *Api;			// API
 	bool Initialized;						// Initialization flag
-	UINT NumSlot;							// The number of slots
-	UINT *SlotIdList;						// Slot ID list
+	CK_ULONG NumSlot;						// The number of slots
+	CK_SLOT_ID *SlotIdList;					// Slot ID list
 	bool SessionCreated;					// Session creation flags
 	UINT SessionId;							// Session ID
 	UINT SessionSlotNumber;					// Slot ID of the session
@@ -247,7 +248,7 @@ X *ReadSecCertFromObject(SECURE *sec, SEC_OBJ *obj);
 X *ReadSecCert(SECURE *sec, char *name);
 bool WriteSecKey(SECURE *sec, bool private_obj, char *name, K *k);
 bool DeleteSecKey(SECURE *sec, char *name);
-bool SignSecByObject(SECURE *sec, SEC_OBJ *obj, void *dst, void *src, UINT size);
+bool SignSecByObject(SECURE *sec, SEC_OBJ *obj, void *dst, void *src, CK_ULONG size);
 bool SignSec(SECURE *sec, char *name, void *dst, void *src, UINT size);
 bool ChangePin(SECURE *sec, char *old_pin, char *new_pin);
 void TestSec();

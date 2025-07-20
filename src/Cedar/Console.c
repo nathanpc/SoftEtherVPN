@@ -1981,6 +1981,14 @@ char *ParseCommandA(wchar_t *str, char *name)
 	return ret;
 }
 
+#ifndef	OS_WIN32
+	// use a simple wrapper to create a compatible function,
+	// allowing for uniform use of getch() below
+	static int getch(void) {
+		return getc(stdin);
+	}
+#endif	// OS_WIN32
+
 // Password prompt
 bool PasswordPrompt(char *password, UINT size)
 {
@@ -2005,13 +2013,7 @@ bool PasswordPrompt(char *password, UINT size)
 
 	while (true)
 	{
-		int c;
-
-#ifdef	OS_WIN32
-		c = getch();
-#else	// OS_WIN32
-		c = getc(stdin);
-#endif	// OS_WIN32
+		int c = getch();
 
 		if (c >= 0x20 && c <= 0x7E)
 		{

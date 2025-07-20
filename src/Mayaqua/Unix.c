@@ -309,9 +309,8 @@ OS_DISPATCH_TABLE *UnixGetDispatchTable()
 	return &t;
 }
 
-static void *signal_received_for_ignore(int sig, siginfo_t *info, void *ucontext) 
+static void signal_received_for_ignore(int sig, siginfo_t *info, void *ucontext)
 {
-	return NULL;
 }
 
 // Ignore the signal flew to the thread
