@@ -162,7 +162,7 @@ struct SECURE
 	CK_SLOT_ID *SlotIdList;					// Slot ID list
 	bool SessionCreated;					// Session creation flags
 	UINT SessionId;							// Session ID
-	UINT SessionSlotNumber;					// Slot ID of the session
+	CK_SLOT_ID SessionSlotNumber;			// Slot ID of the session
 	bool LoginFlag;							// Logged-in flag
 	SEC_INFO *Info;							// Token information
 	LIST *EnumCache;						// Enumeration cache
@@ -220,7 +220,7 @@ bool CheckSecureDeviceId(UINT id);
 SECURE_DEVICE *GetSecureDevice(UINT id);
 SECURE *OpenSec(UINT id);
 void CloseSec(SECURE *sec);
-bool OpenSecSession(SECURE *sec, UINT slot_number);
+bool OpenSecSession(SECURE *sec, CK_SLOT_ID slot_number);
 void CloseSecSession(SECURE *sec);
 bool LoginSec(SECURE *sec, char *pin);
 void LogoutSec(SECURE *sec);

@@ -1710,7 +1710,7 @@ void CloseSecSession(SECURE *sec)
 }
 
 // Open the session
-bool OpenSecSession(SECURE *sec, UINT slot_number)
+bool OpenSecSession(SECURE *sec, CK_SLOT_ID slot_number)
 {
 	UINT err = 0;
 	CK_SESSION_HANDLE session;
@@ -1835,7 +1835,7 @@ SECURE *OpenSec(UINT id)
 		return NULL;
 	}
 
-	sec->SlotIdList = (CK_SLOT_ID *)ZeroMalloc(sizeof(UINT) * sec->NumSlot);
+	sec->SlotIdList = (CK_SLOT_ID *)ZeroMalloc(sizeof(CK_SLOT_ID) * sec->NumSlot);
 
 	if (sec->Api->C_GetSlotList(TRUE, sec->SlotIdList, &sec->NumSlot) != CKR_OK)
 	{
