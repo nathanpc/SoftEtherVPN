@@ -5970,7 +5970,7 @@ void SiLoadServerCfg(SERVER *s, FOLDER *f)
 		s->DisableDeadLockCheck = CfgGetBool(f, "DisableDeadLockCheck");
 
 		// Eraser
-		SetEraserCheckInterval(CfgGetInt(f, "AutoDeleteCheckIntervalSecs"));
+		SetEraserCheckInterval(CfgGetInt(f, "AutoDeleteCheckIntervalSecs") * 1000);
 		s->Eraser = NewEraser(s->Logger, CfgGetInt64(f, "AutoDeleteCheckDiskFreeSpaceMin"));
 
 		// WebUI
@@ -6391,7 +6391,7 @@ void SiWriteServerCfg(FOLDER *f, SERVER *s)
 
 		// Eraser related
 		CfgAddInt64(f, "AutoDeleteCheckDiskFreeSpaceMin", s->Eraser->MinFreeSpace);
-		CfgAddInt(f, "AutoDeleteCheckIntervalSecs", GetEraserCheckInterval());
+		CfgAddInt(f, "AutoDeleteCheckIntervalSecs", GetEraserCheckInterval() / 1000);
 
 		// WebUI
 		CfgAddBool(f, "UseWebUI", s->UseWebUI);

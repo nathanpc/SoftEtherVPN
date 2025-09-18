@@ -119,6 +119,7 @@ static char *delete_targets[] =
 	"bridge_log",
 	"packet_log_archive",
 	"azure_log",
+	"client_log",
 };
 
 static UINT eraser_check_interval = DISK_FREE_CHECK_INTERVAL_DEFAULT;
@@ -487,21 +488,14 @@ void SetEraserCheckInterval(UINT interval)
 	}
 	else
 	{
-		eraser_check_interval = interval * 1000;
+		eraser_check_interval = interval;
 	}
 }
 
 // Get the interval for disk free space check
 UINT GetEraserCheckInterval()
 {
-	UINT ret = eraser_check_interval / 1000;
-
-	if (ret == 0)
-	{
-		ret = 1;
-	}
-
-	return ret;
+	return eraser_check_interval;
 }
 
 // Create a new eraser
